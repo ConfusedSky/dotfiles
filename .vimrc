@@ -21,9 +21,7 @@ Plugin 'xolox/vim-misc.git'
 Plugin 'xolox/vim-easytags.git'
 Plugin 'majutsushi/tagbar'
 Plugin 'JamshedVesuna/vim-markdown-preview'
-
 call vundle#end()
-
 set number relativenumber
 
 filetype plugin indent on
