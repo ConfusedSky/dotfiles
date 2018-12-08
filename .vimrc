@@ -21,10 +21,22 @@ Plugin 'xolox/vim-misc.git'
 Plugin 'xolox/vim-easytags.git'
 Plugin 'majutsushi/tagbar'
 Plugin 'JamshedVesuna/vim-markdown-preview'
+
+Plugin 'Shougo/vimproc.vim'
+Plugin 'Shougo/unite.vim'
+Plugin 'Quramy/tsuquyomi'
+Plugin 'Quramy/vim-js-pretty-template'
+Plugin 'jason0x43/vim-js-indent'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'mhartington/vim-typings'
+
 call vundle#end()
 set number relativenumber
 
 filetype plugin indent on
+syntax on
+
+autocmd BufNewFile,BufRead *.ts setlocal filetype=typescript
 
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
@@ -62,6 +74,7 @@ set laststatus=2
 set undofile
 
 let mapleader = ","
+
 nnoremap <leader>1 yypVr=
 
 nnoremap / /\v
@@ -104,6 +117,10 @@ nnoremap <leader>es :so $MYVIMRC<cr>
 inoremap jj <ESC>
 nnoremap <leader>w <C-w>v<C-w>l
 
+" Copy and paste functionality
+inoremap <C-v> <ESC>"+pi
+vnoremap <C-c> "+y
+
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -127,6 +144,8 @@ set pumheight=20
 
 " SuperTab completion fall-back 
 let g:SuperTabDefaultCompletionType='<c-x><c-u><c-p>'
+
+let g:EclimCompletionMethod = 'omnifunc'
 
 colorscheme Molokai
 let g:molokai_original = 1
