@@ -12,23 +12,29 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'bling/vim-airline.git'
-Plugin 'valloric/youcompleteme'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'juanwolf/browserlink.vim'
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plugin 'vim-syntastic/syntastic'
+"Plugin 'valloric/youcompleteme'
+"Plugin 'flazz/vim-colorschemes'
+"Plugin 'juanwolf/browserlink.vim'
+"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Tags plugins
-Plugin 'xolox/vim-misc.git'
-Plugin 'xolox/vim-easytags.git'
-Plugin 'majutsushi/tagbar'
-Plugin 'JamshedVesuna/vim-markdown-preview'
+"Plugin 'xolox/vim-misc.git'
+"Plugin 'xolox/vim-easytags.git'
+"Plugin 'majutsushi/tagbar'
+"Plugin 'JamshedVesuna/vim-markdown-preview'
+"
 
-Plugin 'Shougo/vimproc.vim'
-Plugin 'Shougo/unite.vim'
-Plugin 'Quramy/tsuquyomi'
-Plugin 'Quramy/vim-js-pretty-template'
-Plugin 'jason0x43/vim-js-indent'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'mhartington/vim-typings'
+" Rust plugins
+Plugin 'rust-lang/rust.vim'
+Plugin 'racer-rust/racer'
+
+"Plugin 'Shougo/vimproc.vim'
+"Plugin 'Shougo/unite.vim'
+"Plugin 'Quramy/tsuquyomi'
+"Plugin 'Quramy/vim-js-pretty-template'
+"Plugin 'jason0x43/vim-js-indent'
+"Plugin 'leafgarland/typescript-vim'
+"Plugin 'mhartington/vim-typings'
 
 call vundle#end()
 set number relativenumber
@@ -71,7 +77,6 @@ set ttyfast
 set ruler
 set backspace=indent,eol,start
 set laststatus=2
-set undofile
 
 let mapleader = ","
 
@@ -142,10 +147,23 @@ set completeopt=menu,menuone
 " Limit popup menu height
 set pumheight=20
 
-" SuperTab completion fall-back 
-let g:SuperTabDefaultCompletionType='<c-x><c-u><c-p>'
-
-let g:EclimCompletionMethod = 'omnifunc'
-
 colorscheme Molokai
 let g:molokai_original = 1
+
+let g:racer_experiemental_completer = 1
+let g:racer_insert_paren = 1
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+function! SyntasticCheckHook(errors)
+    if !empty(a:errors)
+        let g:syntastic_loc_list_height = min([len(a:errors), 10])
+    endif
+endfunction
